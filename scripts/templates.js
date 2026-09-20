@@ -1,15 +1,15 @@
-function getPokemonCards(pokemon) {
+function getPokemonCards(pokemon, pokemonNumber) {
     return `<div class="pokemoncard">
                 <div class="pokemoncard-headline">
-                    <p class="pokemon-number">#001</p>
-                    <p class="pokemon-name">Bisasam</p>
+                    <p class="pokemon-number">${pokemonNumber}</p>
+                    <p class="pokemon-name">${pokemon.name}</p>
                 </div>
-                <div class="pokemon-img">
-                    <img src="#" alt="pokemon-name">
+                <div class="pokemon-img" onclick="pokemonCries(${pokemonNumber})">
+                    <img src="${pokemonImageFrontGray + pokemonNumber}.png" alt="${pokemon.name}">
                 </div>
                 <div class="pokemon-stats">
-                    <p>height: 3m</p>
-                    <p>weight: 40kg</p>
+                    <p>height: </p>
+                    <p>weight: </p>
                 </div>
             </div>
 `}
