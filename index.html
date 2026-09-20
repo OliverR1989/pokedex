@@ -7,9 +7,11 @@
     <title>Pokedex</title>
     <link href="style.css" rel="stylesheet">
     <link href="./styles/typography.css" rel="stylesheet">
+    <link href="./styles/pokemoncards.css" rel="stylesheet">
+    <script src="./scripts/templates.js"></script>
 </head>
 
-<body>
+<body onload="init()">
     <header>
         <div class="header-wrapper">
             <div class="headercicles">
@@ -30,9 +32,25 @@
         </div>
     </header>
     <main>
-        <div class="main-border">
-            <div class="main-wrapper">
-
+        <div class="main-wrapper">
+            <div class="nav-bar">
+                <div class="nav-bar-header">
+                    <p class="headlinetext">Pokédex</p>
+                    <p class="result">151 gefunden</p>
+                </div>
+                <div class="searchbar">
+                    <p class="headlinetext">Search...</p>
+                    <input type="text" id="name" name="name" placeholder="Name or Number...">
+                </div>
+                <div class="filter-buttons">
+                    <button class="category-btn">All</button>
+                    <button class="category-btn">Fire</button>
+                    <button class="category-btn">Water</button>
+                    <button class="category-btn">Elektro</button>
+                    <button class="category-btn">Psycho</button>
+                </div>
+            </div>
+            <div class="main-content" id="pokemoncards">
             </div>
         </div>
     </main>
@@ -61,6 +79,7 @@
             </div>
         </div>
     </footer>
+    <script src="script.js"></script>
 </body>
 
 </html>
