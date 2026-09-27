@@ -6,10 +6,14 @@ const pokemonList = document.getElementById("pokemoncards");
 let catchedPokemon = [];
 
 async function fetchPokemon() {
+    let pokeCurrentLimit = pokeMaxLimit - pokeAPIOffset;
+    if (pokeCurrentLimit <= pokeAPILimit) {
+        pokeAPILimit = pokeCurrentLimit;
+    }
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${pokeAPILimit}&offset=${pokeAPIOffset}`);
     const data = await response.json();
 
-    for (let index = pokeAPIOffset; index < data.results.length; index++) {
+    for (let index = 0; index < data.results.length; index++) {
         const detailRespsonse = await fetch(data.results[index].url);
         const detailData = await detailRespsonse.json();
         catchedPokemon.push(detailData);
@@ -20,6 +24,7 @@ async function fetchPokemon() {
 }
 
 function renderPokemonList() {
+    pokemonList.innerHTML = "";
     for (let index = 0; index < catchedPokemon.length; index++) {
         pokemonList.innerHTML += getPokemonCards(index);
     }
@@ -27,14 +32,19 @@ function renderPokemonList() {
 
 async function fetchMorePokemon() {
     if (pokeAPIOffset <= 151) {
-        
-    } else {
-        document.getElementById("loadMore").classList.add("load-more-hidden");
+        await fetchPokemon();
+        renderPokemonList();
+        updateCatchedPokemon();
     }
-   }
+    console.log(catchedPokemon);
+    console.log(pokeCurrentLimit);
+}
 
 function updateCatchedPokemon() {
     document.getElementById("catchedPokemonResult").innerHTML = catchedPokemon.length + " catched";
+    if (pokeAPIOffset >= 151) {
+        document.getElementById("loadMore").classList.add("load-more-hidden");
+    }
 }
 
 async function init() {
