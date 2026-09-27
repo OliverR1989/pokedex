@@ -265,6 +265,27 @@ footer {
     gap: 20px;
 }
 
+.load-more-hidden {
+    display: none;
+}
+
+.load-more-btn {
+    width: 260px;
+    height: 64px;
+
+    background-color: #6E1506;
+    border: transparent;
+    border-radius: 50px;
+    color: white;
+    font-size: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.load-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 .next-btn {
     width: 64px;
     height: 64px;

@@ -37,18 +37,11 @@
             <div class="nav-bar">
                 <div class="nav-bar-header">
                     <p class="headlinetext">Pokédex</p>
-                    <p class="result">151 gefunden</p>
+                    <p class="result" id="catchedPokemonResult"></p>
                 </div>
                 <div class="searchbar">
                     <p class="headlinetext">Search...</p>
                     <input type="text" id="name" name="name" placeholder="Name or Number...">
-                </div>
-                <div class="filter-buttons">
-                    <button class="category-btn">All</button>
-                    <button class="category-btn">Fire</button>
-                    <button class="category-btn">Water</button>
-                    <button class="category-btn">Elektro</button>
-                    <button class="category-btn">Psycho</button>
                 </div>
             </div>
             <div class="main-content" id="pokemoncards">
@@ -71,8 +64,8 @@
                 <div class="footercircle"></div>
                 <div class="footercircle"></div>
             </div>
-            <div class="joystick">
-
+            <div class="load-more" id="loadMore">
+                <button class="load-more-btn" id="loadMoreBtn" onclick="fetchMorePokemon()">catch more Pokemon</button>
             </div>
             <div class="buttons">
                 <button class="last-btn" id="last-btn">L</button>
