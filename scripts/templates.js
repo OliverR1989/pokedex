@@ -4,12 +4,10 @@ function getPokemonCards(index) {
                     <p class="pokemon-number">#${catchedPokemon[index].id}</p>
                     <p class="pokemon-name">${catchedPokemon[index].name}</p>
                 </div>
-                <div class="pokemoncard-img" onclick="">
-                    <img src="" alt="${catchedPokemon[index].name}">
+                <div class="pokemoncard-img img" onclick="playPokemonCry(${index})">
+                    <img src="${catchedPokemon[index].sprites.versions["generation-i"]["red-blue"]["front_default"]}" alt="${catchedPokemon[index].name}">
                 </div>
-                <div class="pokemoncard-types">
-                    <p>height:</p>
-                    <p>weight: </p>
+                <div class="pokemoncard-types" id="pokemoncard-types"> ${getPokemonTypes(index)}
                 </div>
             </div>
 `}

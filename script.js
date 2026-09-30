@@ -7,10 +7,10 @@ let catchedPokemon = [];
 
 async function fetchPokemon() {
     let pokeCurrentLimit = pokeMaxLimit - pokeAPIOffset;
-    if (pokeCurrentLimit <= pokeAPILimit) {
-        pokeAPILimit = pokeCurrentLimit;
+    if (pokeAPILimit <= pokeCurrentLimit) {
+        pokeCurrentLimit = pokeAPILimit;
     }
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${pokeAPILimit}&offset=${pokeAPIOffset}`);
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
     const data = await response.json();
 
     for (let index = 0; index < data.results.length; index++) {
@@ -19,7 +19,7 @@ async function fetchPokemon() {
         catchedPokemon.push(detailData);
     }
     pokeAPIOffset += pokeAPILimit;
-    console.log(pokeAPIOffset)
+
     console.log(catchedPokemon)
 }
 
@@ -36,8 +36,21 @@ async function fetchMorePokemon() {
         renderPokemonList();
         updateCatchedPokemon();
     }
-    console.log(catchedPokemon);
-    console.log(pokeCurrentLimit);
+}
+
+function getPokemonTypes(index) {
+    let pokemonTypes = "";
+
+    for (let typeIndex = 0; typeIndex < catchedPokemon[index].types.length; typeIndex++) {
+        pokemonTypes += `<p>${catchedPokemon[index].types[typeIndex].type.name}</p>`;
+    }
+    return pokemonTypes;
+}
+
+function playPokemonCry(index) {
+    const pokemonCries = new Audio(catchedPokemon[index].cries.legacy);
+    pokemonCries.volume = 0.1;
+    pokemonCries.play();
 }
 
 function updateCatchedPokemon() {
