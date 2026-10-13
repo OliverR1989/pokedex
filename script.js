@@ -4,6 +4,7 @@ const pokeAPILimit = 40;
 let pokeAPIOffset = 0;
 const pokemonList = document.getElementById("pokemoncards");
 let catchedPokemon = [];
+let currentPokemonIndex = 0;
 
 async function fetchPokemon() {
     let pokeCurrentLimit = pokeMaxLimit - pokeAPIOffset;
@@ -63,13 +64,27 @@ function updateCatchedPokemon() {
 function openPokemoncard(index) {
     const pokemonCard = document.getElementById("modal");
     pokemonCard.innerHTML = getPokemonDetailCard(index);
+    pokemonCard.classList.remove("pokemondetailcard-modal-hidden");
+    pokemonCard.classList.add("pokemondetailcard-modal")
     pokemonCard.showModal();
-    
+    currentPokemonIndex = index;
 }
 
 function closePokemoncard() {
     const pokemonCard = document.getElementById("modal");
+    pokemonCard.classList.add("pokemondetailcard-modal-hidden");
+    pokemonCard.classList.remove("pokemondetailcard-modal")
     pokemonCard.close();
+}
+
+function nextPokemoncard() {
+    currentPokemonIndex = (currentPokemonIndex + 1) % catchedPokemon.length;
+    openPokemoncard(currentPokemonIndex);
+}
+
+function previousPokemoncard() {
+    currentPokemonIndex = (currentPokemonIndex - 1 + catchedPokemon.length) % catchedPokemon.length;
+    openPokemoncard(currentPokemonIndex);
 }
 
 async function init() {
