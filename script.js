@@ -60,6 +60,18 @@ function updateCatchedPokemon() {
     }
 }
 
+function openPokemoncard(index) {
+    const pokemonCard = document.getElementById("modal");
+    pokemonCard.innerHTML = getPokemonDetailCard(index);
+    pokemonCard.showModal();
+    
+}
+
+function closePokemoncard() {
+    const pokemonCard = document.getElementById("modal");
+    pokemonCard.close();
+}
+
 async function init() {
     await fetchPokemon();
     renderPokemonList();
