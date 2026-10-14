@@ -26,10 +26,22 @@ function getPokemonDetailCard(index) {
                         <div class="pokemondetailcard-types"> ${getPokemonTypes(index)}</div>
                     </div>
                     <div class="pokemondetailcard-footer">
+                        <div class="pokemondetailcard-stats">
+                            <div class="pokemondetailcard-abilities">
+                                ${getPokemonAbilities(index)}
+                            </div>
+                            <div class="pokemondetailcard-stat">
+                                ${getPokemonStats(index)}
+                            </div>
+                            <div class="pokemondetailcard-height-weight">
+                                <p class="pokemon-height">height: ${catchedPokemon[index].height/10} m</p>
+                                <p class="pokemon-weight">weight: ${catchedPokemon[index].weight/10} kg</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="pokemondetailcard-navbar">
-                        <button class="last-btn" onclick="previousPokemoncard(currentPokemonIndex)">Prev</button>
-                        <button  class="next-btn" onclick="nextPokemoncard(currentPokemonIndex)">Next</button>
+                        <button class="last-btn" onclick="previousPokemoncard()">Prev</button>
+                        <button  class="next-btn" onclick="nextPokemoncard()">Next</button>
                     </div>
                 </div>
 `

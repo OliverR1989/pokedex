@@ -11,12 +11,12 @@ async function fetchPokemon() {
     if (pokeAPILimit <= pokeCurrentLimit) {
         pokeCurrentLimit = pokeAPILimit;
     }
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
+    const response = await fetch(`${pokeAPIURL}?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
     const data = await response.json();
 
     for (let index = 0; index < data.results.length; index++) {
-        const detailRespsonse = await fetch(data.results[index].url);
-        const detailData = await detailRespsonse.json();
+        const detailResponse = await fetch(data.results[index].url);
+        const detailData = await detailResponse.json();
         catchedPokemon.push(detailData);
     }
     pokeAPIOffset += pokeAPILimit;
@@ -32,7 +32,7 @@ function renderPokemonList() {
 }
 
 async function fetchMorePokemon() {
-    if (pokeAPIOffset <= 151) {
+    if (pokeAPIOffset <= pokeMaxLimit) {
         await fetchPokemon();
         renderPokemonList();
         updateCatchedPokemon();
@@ -48,6 +48,25 @@ function getPokemonTypes(index) {
     return pokemonTypes;
 }
 
+function getPokemonAbilities(index) {
+    let pokemonAbilities = "";
+
+    for (let abilityIndex = 0; abilityIndex < catchedPokemon[index].abilities.length; abilityIndex++) {
+        pokemonAbilities += `<p>${catchedPokemon[index].abilities[abilityIndex].ability.name}</p>`;
+    }
+    return pokemonAbilities;
+}
+
+function getPokemonStats(index) {
+    let pokemonStats = "";
+
+    for (let statIndex = 0; statIndex < catchedPokemon[index].stats.length; statIndex++) {
+        pokemonStats += `<div class="pokemon-stats"><p>${catchedPokemon[index].stats[statIndex].stat.name}</p>
+                            <p>${catchedPokemon[index].stats[statIndex].base_stat}</p></div>`;
+    }
+    return pokemonStats;
+}
+
 function playPokemonCry(index) {
     const pokemonCries = new Audio(catchedPokemon[index].cries.legacy);
     pokemonCries.volume = 0.1;
@@ -56,7 +75,7 @@ function playPokemonCry(index) {
 
 function updateCatchedPokemon() {
     document.getElementById("catchedPokemonResult").innerHTML = catchedPokemon.length + " catched";
-    if (pokeAPIOffset >= 151) {
+    if (pokeAPIOffset >= pokeMaxLimit) {
         document.getElementById("loadMore").classList.add("load-more-hidden");
     }
 }
