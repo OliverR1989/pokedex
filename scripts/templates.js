@@ -46,3 +46,31 @@ function getPokemonDetailCard(index) {
                 </div>
 `
 }
+
+function getPokemonTypes(index) {
+    let pokemonTypes = "";
+
+    for (let typeIndex = 0; typeIndex < catchedPokemon[index].types.length; typeIndex++) {
+        pokemonTypes += `<p class="type ${catchedPokemon[index].types[typeIndex].type.name}">${catchedPokemon[index].types[typeIndex].type.name}</p>`;
+    }
+    return pokemonTypes;
+}
+
+function getPokemonAbilities(index) {
+    let pokemonAbilities = "";
+
+    for (let abilityIndex = 0; abilityIndex < catchedPokemon[index].abilities.length; abilityIndex++) {
+        pokemonAbilities += `<p>${catchedPokemon[index].abilities[abilityIndex].ability.name}</p>`;
+    }
+    return pokemonAbilities;
+}
+
+function getPokemonStats(index) {
+    let pokemonStats = "";
+
+    for (let statIndex = 0; statIndex < catchedPokemon[index].stats.length; statIndex++) {
+        pokemonStats += `<div class="pokemon-stats"><p>${catchedPokemon[index].stats[statIndex].stat.name}</p>
+                            <p>${catchedPokemon[index].stats[statIndex].base_stat}</p></div>`;
+    }
+    return pokemonStats;
+}

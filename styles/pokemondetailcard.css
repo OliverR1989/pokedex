@@ -1,7 +1,3 @@
-.pokemondetailcard-modal-hidden {
-    display: none;
-}
-
 .pokemondetailcard-modal {
     width: 100%;
     height: 100%;
@@ -14,6 +10,10 @@
     border: 10px solid black;
     border-radius: 30px;
     color: rgba(253, 234, 220, 1);
+}
+
+.pokemondetailcard-modal::backdrop { 
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .pokemondetailcard-wrapper {

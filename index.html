@@ -10,6 +10,7 @@
     <link href="./styles/typography.css" rel="stylesheet">
     <link href="./styles/pokemoncards.css" rel="stylesheet">
     <link href="./styles/pokemondetailcard.css" rel="stylesheet">
+    <link href="./styles/types.css" rel="stylesheet">
     <script src="./scripts/templates.js"></script>
 </head>
 
@@ -41,7 +42,7 @@
                 </div>
                 <div class="searchbar">
                     <p class="headlinetext">Search...</p>
-                    <input type="text" id="name" name="name" placeholder="Name or Number...">
+                    <input oninput="searchPokemon()" type="text" id="pokemonName" name="name" placeholder="Name or Number...">
                 </div>
             </div>
             <div class="main-content" id="pokemoncards">
@@ -68,8 +69,9 @@
                 <button class="load-more-btn" id="loadMoreBtn" onclick="fetchMorePokemon()">catch more Pokemon</button>
             </div>
         </div>
+    
     </footer>
-    <dialog class="pokemondetailcard-modal-hidden" id="modal"></dialog>
+    <dialog class="pokemondetailcard-modal" id="modal" onclick="closeOnBackdropClick(event)"></dialog>
     <script src="script.js"></script>
 </body>
 
