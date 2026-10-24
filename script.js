@@ -7,21 +7,38 @@ let catchedPokemon = [];
 let currentPokemonIndex = 0;
 
 async function fetchPokemon() {
+    const pokeCurrentLimit = getCurrentLimit();
+    const response = await fetch(`${pokeAPIURL}?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
+    const data = await response.json();
+    const pokemonPromises = [];
+    
+    for (let index = 0; index < data.results.length; index++) {
+        pokemonPromises.push(fetchPokemonDetail(data.results[index].url));
+    }
+
+    const loadedPokemon = await Promise.all(pokemonPromises);
+    addToCatchedPokemon(loadedPokemon);
+    pokeAPIOffset += pokeCurrentLimit;
+}
+
+function addToCatchedPokemon(newPokemon) {
+   for (let index = 0; index < newPokemon.length; index++) {
+        catchedPokemon.push(newPokemon[index]);
+    }
+}
+
+function getCurrentLimit() {
     let pokeCurrentLimit = pokeMaxLimit - pokeAPIOffset;
     if (pokeAPILimit <= pokeCurrentLimit) {
         pokeCurrentLimit = pokeAPILimit;
     }
-    const response = await fetch(`${pokeAPIURL}?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
+    return pokeCurrentLimit;
+}
+
+async function fetchPokemonDetail(url) {
+    const response = await fetch(url);
     const data = await response.json();
-
-    for (let index = 0; index < data.results.length; index++) {
-        const detailResponse = await fetch(data.results[index].url);
-        const detailData = await detailResponse.json();
-        catchedPokemon.push(detailData);
-    }
-    pokeAPIOffset += pokeAPILimit;
-
-    console.log(catchedPokemon)
+    return data;
 }
 
 function renderPokemonList() {
@@ -55,7 +72,9 @@ function updateCatchedPokemon() {
 function openPokemoncard(index) {
     const pokemonCard = document.getElementById("modal");
     pokemonCard.innerHTML = getPokemonDetailCard(index);
-    pokemonCard.showModal();
+    if (pokemonCard.open === false) {
+        pokemonCard.showModal();
+    }
     currentPokemonIndex = index;
 }
 
@@ -82,12 +101,15 @@ function previousPokemoncard() {
 }
 
 function searchPokemon() {
-    let pokemonValue = document.getElementById("pokemonName").value;
+    const pokemonValue = document.getElementById("pokemonName").value;
     const pokemonResult = pokemonValue.toLowerCase().trim();
     if (pokemonResult.length < 3) {
+        document.getElementById("loadMore").classList.remove("load-more-hidden");
+        updateCatchedPokemon();
         renderPokemonList();
         return;
     }
+    document.getElementById("loadMore").classList.add("load-more-hidden");
     renderFoundPokemon(pokemonResult);
 }
 
@@ -98,7 +120,7 @@ function renderFoundPokemon(pokemonResult) {
         if (catchedPokemon[index].name.includes(pokemonResult)) {
             foundPokemon += getPokemonCards(index);
         }
-    } 
+    }
     if (foundPokemon === "") {
         pokemonList.innerHTML = `<p class="no-pokemon">No Pokemon found</p>`;
     } else {

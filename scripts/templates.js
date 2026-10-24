@@ -44,8 +44,7 @@ function getPokemonDetailCard(index) {
                         <button  class="next-btn" onclick="nextPokemoncard()">Next</button>
                     </div>
                 </div>
-`
-}
+`}
 
 function getPokemonTypes(index) {
     let pokemonTypes = "";
@@ -69,8 +68,13 @@ function getPokemonStats(index) {
     let pokemonStats = "";
 
     for (let statIndex = 0; statIndex < catchedPokemon[index].stats.length; statIndex++) {
-        pokemonStats += `<div class="pokemon-stats"><p>${catchedPokemon[index].stats[statIndex].stat.name}</p>
-                            <p>${catchedPokemon[index].stats[statIndex].base_stat}</p></div>`;
+        pokemonStats += `<div class="pokemon-stats">
+                            <p>${catchedPokemon[index].stats[statIndex].stat.name}:</p>
+                            <div class="stats-line">
+                                <div class="stats-line-fill" style="width:${catchedPokemon[index].stats[statIndex].base_stat/150*100}%;"></div>
+                            </div>
+                            <p>${catchedPokemon[index].stats[statIndex].base_stat}</p>
+                        </div>`;
     }
     return pokemonStats;
 }
