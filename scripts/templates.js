@@ -15,7 +15,7 @@ function getPokemonCards(index) {
 function getPokemonDetailCard(index) {
     return `<div class="pokemondetailcard-wrapper">
                     <div class="pokemondetailcard-header">
-                        <button onclick="closePokemoncard()">close</button>
+                        <button class="close-pokemoncard-btn" onclick="closePokemoncard()"></button>
                     </div>
                     <div class="pokemondetailcard-main" onclick="playPokemonCry(${index})">
                         <img src="${catchedPokemon[index].sprites["other"]["official-artwork"].front_default}" alt="${catchedPokemon[index].name}">
@@ -40,8 +40,8 @@ function getPokemonDetailCard(index) {
                         </div>
                     </div>
                     <div class="pokemondetailcard-navbar">
-                        <button class="last-btn" onclick="previousPokemoncard()">Prev</button>
-                        <button  class="next-btn" onclick="nextPokemoncard()">Next</button>
+                        <button class="prev-btn" onclick="previousPokemoncard()"></button>
+                        <button  class="next-btn" onclick="nextPokemoncard()"></button>
                     </div>
                 </div>
 `}

@@ -1,4 +1,4 @@
-const pokeAPIURL = "https://pokeapi.co/api/v2/pokemon";
+const pokeAPIURL = "https:/pokeapi.co/api/v2/pokemon";
 const pokeMaxLimit = 151;
 const pokeAPILimit = 40;
 let pokeAPIOffset = 0;
@@ -8,21 +8,40 @@ let currentPokemonIndex = 0;
 
 async function fetchPokemon() {
     const pokeCurrentLimit = getCurrentLimit();
-    const response = await fetch(`${pokeAPIURL}?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
-    const data = await response.json();
-    const pokemonPromises = [];
-    
-    for (let index = 0; index < data.results.length; index++) {
-        pokemonPromises.push(fetchPokemonDetail(data.results[index].url));
+    try {
+        const data = await fetchJson(`${pokeAPIURL}?limit=${pokeCurrentLimit}&offset=${pokeAPIOffset}`);
+        const pokemonPromises = createPokemonPromises(data.results);
+        const loadedPokemon = await Promise.all(pokemonPromises);
+        addToCatchedPokemon(loadedPokemon);
+        pokeAPIOffset += pokeCurrentLimit;
+        return true;
+    } catch (error) {
+        pokemonList.innerHTML = `<p class="no-pokemon">Pokémon could not be loaded</p>`;
+        console.error(error);
+        return false;
     }
+}
 
-    const loadedPokemon = await Promise.all(pokemonPromises);
-    addToCatchedPokemon(loadedPokemon);
-    pokeAPIOffset += pokeCurrentLimit;
+async function fetchJson(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error("Server-Fehler:" + response.status);
+    }
+    const data = await response.json();
+    return data;
+}
+
+function createPokemonPromises(results) {
+    const pokemonPromises = [];
+
+    for (let index = 0; index < results.length; index++) {
+        pokemonPromises.push(fetchJson(results[index].url));
+    }
+    return pokemonPromises;
 }
 
 function addToCatchedPokemon(newPokemon) {
-   for (let index = 0; index < newPokemon.length; index++) {
+    for (let index = 0; index < newPokemon.length; index++) {
         catchedPokemon.push(newPokemon[index]);
     }
 }
@@ -35,12 +54,6 @@ function getCurrentLimit() {
     return pokeCurrentLimit;
 }
 
-async function fetchPokemonDetail(url) {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
-}
-
 function renderPokemonList() {
     pokemonList.innerHTML = "";
     for (let index = 0; index < catchedPokemon.length; index++) {
@@ -49,11 +62,12 @@ function renderPokemonList() {
 }
 
 async function fetchMorePokemon() {
-    if (pokeAPIOffset <= pokeMaxLimit) {
-        await fetchPokemon();
-        renderPokemonList();
-        updateCatchedPokemon();
+    const loaded = await fetchPokemon();
+    if (loaded !== true) {
+        return
     }
+    renderPokemonList();
+    updateCatchedPokemon();
 }
 
 function playPokemonCry(index) {
@@ -129,7 +143,10 @@ function renderFoundPokemon(pokemonResult) {
 }
 
 async function init() {
-    await fetchPokemon();
+    const loaded = await fetchPokemon();
+    if (loaded !== true) {
+        return;
+    }
     renderPokemonList();
     updateCatchedPokemon();
 }

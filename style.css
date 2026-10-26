@@ -280,32 +280,11 @@ footer {
     border-radius: 50px;
     color: white;
     font-size: 16px;
+    cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .load-more-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.next-btn {
-    width: 45px;
-    height: 28px;
-
-    background-color: black;
-    border: transparent;
-    border-radius: 50px;
-    color: white;
-    font-size: 16px;
-}
-
-.last-btn {
-    width: 45px;
-    height: 28px;
-
-    background-color: #2D6C92;
-    border: transparent;
-    border-radius: 50px;
-    color: white;
-    font-size: 16px;
 }
