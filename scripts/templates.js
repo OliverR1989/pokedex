@@ -66,14 +66,15 @@ function getPokemonAbilities(index) {
 
 function getPokemonStats(index) {
     let pokemonStats = "";
-
+    
     for (let statIndex = 0; statIndex < catchedPokemon[index].stats.length; statIndex++) {
+        const stat = catchedPokemon[index].stats[statIndex];
         pokemonStats += `<div class="pokemon-stats">
-                            <p>${catchedPokemon[index].stats[statIndex].stat.name}:</p>
+                            <p>${stat.stat.name}:</p>
                             <div class="stats-line">
-                                <div class="stats-line-fill" style="width:${catchedPokemon[index].stats[statIndex].base_stat/150*100}%;"></div>
+                                <div class="stats-line-fill" style="width:${getStatPercent(stat.base_stat)}%;"></div>
                             </div>
-                            <p>${catchedPokemon[index].stats[statIndex].base_stat}</p>
+                            <p>${stat.base_stat}</p>
                         </div>`;
     }
     return pokemonStats;

@@ -1,4 +1,4 @@
-const pokeAPIURL = "https:/pokeapi.co/api/v2/pokemon";
+const pokeAPIURL = "https://pokeapi.co/api/v2/pokemon";
 const pokeMaxLimit = 151;
 const pokeAPILimit = 40;
 let pokeAPIOffset = 0;
@@ -54,6 +54,10 @@ function getCurrentLimit() {
     return pokeCurrentLimit;
 }
 
+function getStatPercent(baseStat) {
+    return Math.min(baseStat / 150 * 100, 100);
+}
+
 function renderPokemonList() {
     pokemonList.innerHTML = "";
     for (let index = 0; index < catchedPokemon.length; index++) {
@@ -62,9 +66,11 @@ function renderPokemonList() {
 }
 
 async function fetchMorePokemon() {
+    showLoader();
     const loaded = await fetchPokemon();
+    hideLoader();
     if (loaded !== true) {
-        return
+        return;
     }
     renderPokemonList();
     updateCatchedPokemon();
@@ -142,8 +148,20 @@ function renderFoundPokemon(pokemonResult) {
     }
 }
 
+function showLoader() {
+    document.getElementById("loadingScreen").classList.remove("d-none");
+    document.getElementById("loadMoreBtn").disabled = true;
+}
+
+function hideLoader() {
+    document.getElementById("loadingScreen").classList.add("d-none");
+    document.getElementById("loadMoreBtn").disabled = false;
+}
+
 async function init() {
+    showLoader();
     const loaded = await fetchPokemon();
+    hideLoader();
     if (loaded !== true) {
         return;
     }
