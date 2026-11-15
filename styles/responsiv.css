@@ -1,0 +1,55 @@
+@media screen and (min-width: 480px) and (max-width: 1440px) {
+    .headlinetext {
+        font-size: 32px;
+    }
+
+    .bigbluecircle {
+        width: 60px;
+        height: 52px;
+    }
+
+    .littleredcircle {
+        width: 24px;
+        height: 24px;
+    }
+
+    .littleyellowcircle {
+        width: 24px;
+        height: 24px;
+    }
+
+    .littlegreencircle {
+        width: 24px;
+        height: 24px;
+    }
+
+    .result {
+        font-size: 32px;
+        height: auto;
+        margin-bottom: 40px;
+    }
+
+    input[type="text"] {
+        font-size: 24px;
+    }
+
+    .pokemoncard-headline {
+        font-size: 32px;
+    }
+
+    .pokemoncard-img img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .type {
+        font-size: 32px;
+        width: 150px;
+        height: 40px;
+    }
+
+    .load-more-btn {
+        height: auto;
+        font-size: 24px;
+    }
+}
