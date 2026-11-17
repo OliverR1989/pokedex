@@ -36,7 +36,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <main data-id="content">
         <div class="main-wrapper">
             <div class="nav-bar">
                 <div class="nav-bar-header">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="searchbar">
                     <p class="headlinetext">Search...</p>
-                    <input oninput="searchPokemon()" type="text" id="pokemonName" name="name" placeholder="Name...">
+                    <input data-id="search-input" oninput="searchPokemon()" type="text" id="pokemonName" name="name" placeholder="Name...">
                 </div>
             </div>
             <div class="main-content" id="pokemoncards">
@@ -72,11 +72,11 @@
                 <div class="footercircle"></div>
             </div>
             <div class="load-more" id="loadMore">
-                <button class="load-more-btn" id="loadMoreBtn" onclick="fetchMorePokemon()">catch more Pokemon</button>
+                <button data-id="load-more-button" class="load-more-btn" id="loadMoreBtn" onclick="fetchMorePokemon()">catch more Pokemon</button>
             </div>
         </div>
     </footer>
-    <dialog class="pokemondetailcard-modal" id="modal" onclick="closeOnBackdropClick(event)"></dialog>
+    <dialog data-id="dialog" class="pokemondetailcard-modal" id="modal" onclick="closeOnBackdropClick(event)"></dialog>
     <script src="script.js"></script>
 </body>
 

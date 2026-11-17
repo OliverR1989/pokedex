@@ -1,10 +1,10 @@
 function getPokemonCards(index) {
-    return `<div class="pokemoncard" onclick="openPokemoncard(${index})">
+    return `<div data-id="card" class="pokemoncard" onclick="openPokemoncard(${index})">
                 <div class="pokemoncard-headline">
                     <p class="pokemon-number">#${catchedPokemon[index].id}</p>
                     <p class="pokemon-name">${catchedPokemon[index].name}</p>
                 </div>
-                <div class="pokemoncard-img img">
+                <div data-id="card-image" class="pokemoncard-img img">
                     <img src="${catchedPokemon[index].sprites.versions["generation-i"]["red-blue"]["front_default"]}" alt="${catchedPokemon[index].name}">
                 </div>
                 <div class="pokemoncard-types"> ${getPokemonTypes(index)}
@@ -15,11 +15,11 @@ function getPokemonCards(index) {
 function getPokemonDetailCard(index) {
     return `<div class="pokemondetailcard-wrapper">
                     <div class="pokemondetailcard-header">
-                        <button class="close-pokemoncard-btn" onclick="closePokemoncard()"></button>
+                        <button data-id="close-dialog-button" class="close-pokemoncard-btn" onclick="closePokemoncard()"></button>
                     </div>
                     <div class="pokemondetailcard-main" onclick="playPokemonCry(${index})">
-                        <img src="${catchedPokemon[index].sprites["other"]["official-artwork"].front_default}" alt="${catchedPokemon[index].name}">
-                        <div class="pokemondetailcard-headline">
+                        <img data-id="dialog-image" src="${catchedPokemon[index].sprites["other"]["official-artwork"].front_default}" alt="${catchedPokemon[index].name}">
+                        <div data-id="overlay-pokemon-name" class="pokemondetailcard-headline">
                         <p class="pokemon-number">#${catchedPokemon[index].id}</p>
                         <p class="pokemon-name">${catchedPokemon[index].name}</p>
                         </div>
@@ -40,8 +40,8 @@ function getPokemonDetailCard(index) {
                         </div>
                     </div>
                     <div class="pokemondetailcard-navbar">
-                        <button class="prev-btn" onclick="previousPokemoncard()"></button>
-                        <button  class="next-btn" onclick="nextPokemoncard()"></button>
+                        <button data-id="prev-button" class="prev-btn" onclick="previousPokemoncard()"></button>
+                        <button data-id="next-button" class="next-btn" onclick="nextPokemoncard()"></button>
                     </div>
                 </div>
 `}

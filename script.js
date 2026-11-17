@@ -16,7 +16,7 @@ async function fetchPokemon() {
         pokeAPIOffset += pokeCurrentLimit;
         return true;
     } catch (error) {
-        pokemonList.innerHTML = `<p class="no-pokemon">Pokémon could not be loaded</p>`;
+        pokemonList.innerHTML = `<p data-id="not-found" class="no-pokemon">Pokémon could not be loaded</p>`;
         console.error(error);
         return false;
     }
