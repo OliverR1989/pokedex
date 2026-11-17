@@ -4,20 +4,17 @@
     height: auto;
     max-height: 90vh;
     overflow-y: auto;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 30px;
+    margin: auto;
 
     background-color: #e3350d;
     border: 10px solid black;
     border-radius: 30px;
     color: rgba(253, 234, 220, 1);
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .pokemondetailcard-modal::backdrop {
