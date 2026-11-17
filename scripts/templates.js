@@ -15,7 +15,7 @@ function getPokemonCards(index) {
 function getPokemonDetailCard(index) {
     return `<div class="pokemondetailcard-wrapper">
                     <div class="pokemondetailcard-header">
-                        <button data-id="close-dialog-button" class="close-pokemoncard-btn" onclick="closePokemoncard()"></button>
+                        <button aria-label="close" data-id="close-dialog-button" class="close-pokemoncard-btn" onclick="closePokemoncard()"></button>
                     </div>
                     <div class="pokemondetailcard-main" onclick="playPokemonCry(${index})">
                         <img data-id="dialog-image" src="${catchedPokemon[index].sprites["other"]["official-artwork"].front_default}" alt="${catchedPokemon[index].name}">
@@ -40,8 +40,8 @@ function getPokemonDetailCard(index) {
                         </div>
                     </div>
                     <div class="pokemondetailcard-navbar">
-                        <button data-id="prev-button" class="prev-btn" onclick="previousPokemoncard()"></button>
-                        <button data-id="next-button" class="next-btn" onclick="nextPokemoncard()"></button>
+                        <button aria-label="previous" data-id="prev-button" class="prev-btn" onclick="previousPokemoncard()"></button>
+                        <button aria-label="next" data-id="next-button" class="next-btn" onclick="nextPokemoncard()"></button>
                     </div>
                 </div>
 `}

@@ -16,7 +16,7 @@ async function fetchPokemon() {
         pokeAPIOffset += pokeCurrentLimit;
         return true;
     } catch (error) {
-        pokemonList.innerHTML = `<p data-id="not-found" class="no-pokemon">Pokémon could not be loaded</p>`;
+        pokemonList.innerHTML = `<p class="no-pokemon">Pokémon could not be loaded</p>`;
         console.error(error);
         return false;
     }
@@ -142,7 +142,7 @@ function renderFoundPokemon(pokemonResult) {
         }
     }
     if (foundPokemon === "") {
-        pokemonList.innerHTML = `<p class="no-pokemon">No Pokemon found</p>`;
+        pokemonList.innerHTML = `<p data-id="not-found" class="no-pokemon">No Pokemon found</p>`;
     } else {
         pokemonList.innerHTML = foundPokemon;
     }
